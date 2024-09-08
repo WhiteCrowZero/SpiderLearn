@@ -1,0 +1,40 @@
+1.创建项目
+    scrapy startproject 项目名称
+
+2.进入项目
+    cd 项目名称
+
+3.创建爬虫
+    scrapy genspider 名字 域名
+    scrapy genspider (-t crawl) xxx www.xxxx.com        # 加上-t crawl 表示创建一个crawl爬虫，CrawlSpider是Scrapy提供的用来实现全站爬取的子类
+
+4.可能需要修改start urls,修改成你要抓取的那个页面
+
+5.对数据进行解析.在spider里面的parse(response)方法中进行解析
+    def parse(self,response):
+        response.text   # 拿页面源代码
+        response.xpath()
+        response.css()
+        解析数据的时候，需要注意，默认xpath()返回的是Selector对象，
+        想要数据必须使用extract()提取数据
+        extract()返回列表
+        extract_first()返回一个数据
+
+        yield返回数据->把数据交给pipeline来进行持久化存储
+
+6.在pipeline中完成数据的存储
+    class类名()：
+    def process_item(self,item,spider):
+        item:数据
+        spider:爬虫
+        return item
+        # 必须要return东西，否则下一个管道收不到数据
+
+7.设置settings.py文件将pipeline进行生效设置
+    ITEM PIPELINES ={
+        '管道的路径'：优先级（默认是300），
+        # 优先级数越小，优先级越高
+    }
+
+8.运行爬虫
+    scrapy crawl 爬虫的名字
