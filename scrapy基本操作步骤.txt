@@ -5,8 +5,8 @@
     cd 项目名称
 
 3.创建爬虫
-    scrapy genspider 名字 域名
-    scrapy genspider (-t crawl) xxx www.xxxx.com        # 加上-t crawl 表示创建一个crawl爬虫，CrawlSpider是Scrapy提供的用来实现全站爬取的子类
+    scrapy genspider 名字(name) 域名(www.xxxx.com)
+    scrapy genspider (-t crawl)  名字(name) 域名(www.xxxx.com)    # 加上-t crawl 表示创建一个crawl爬虫，CrawlSpider是Scrapy提供的用来实现全站爬取的子类
 
 4.可能需要修改start urls,修改成你要抓取的那个页面
 
